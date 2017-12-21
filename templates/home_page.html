@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>Home Page Template</title>
+
+{% block base_head %}
+<link rel='stylesheet' href='{% static "css/main.css" %}' >
+{% endblock %}
+
+{% block content %}
+<div class='text-center'>
+    <h1>{{ title }}</h1>
+    <h1>Hello, world we're working!</h1>
+</div>
+
+
+<link rel='stylesheet' href='{% static "css/main.css" %}' >
+
+<div class='row'>
+  <div class='col'>
+      <img src="{% static 'img/11.jpg' %}" class='img-fluid' />
+
+  </div>
+</div>
+
+
+<div id="wrapper" class="container">
+     <div class='row'>
+
+             {% for obj in object_list %}
+         <div class='col'>
+             {{ forloop.counter }}
+             {% include 'products/snippets/card.html' with instance=obj %}
+
+             {% if forloop.counter|divisibleby:3 %}
+         </div> </div>
+    <div class='row'>
+        <div class='col-12'><hr/>
+           </div>
+             {% elif forloop.counter|divisibleby:2 %}
+            </div>
+</div>
+<div class='row'><div class='col-12'><hr/></div>
+             {% else %}
+         </div>
+             {% endif %}
+
+
+    {% endfor %}
+</div>
+
+</div>
+
+
+
+{% if request.user.is_authenticated %}
+<div class='row'>
+  <div class='col'>
+  <h1>Premium</h1>
+  {{ premium_content }}
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+
+
